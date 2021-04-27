@@ -1,20 +1,20 @@
-# Piclodio frontend
+# Pradio frontend
 
-This part of the project was written with Angular 7 and was generated with [angular-cli](https://github.com/angular/angular-cli) version 7.3.5. It is now updated to Angular 8.
+This part of the project was written with Angular and was generated with [angular-cli](https://github.com/angular/angular-cli).
 
 ## Installation
 
 ### Pre requisite
 
-Install nodejs 12x 
+Install nodejs 14x 
 ``` bash
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 node --version
 ```
 Clone the project
 ``` bash
-git clone https://github.com/strmark/piclodio4.git
+git clone https://github.com/strmark/kpiradio_frontend.git
 ```
 
 Install Angular cli
@@ -24,7 +24,7 @@ sudo npm install -g @angular/cli
 
 Install dependencies
 ``` bash
-cd piclodio4/front/
+cd kpiradio_frontend
 sudo npm install
 ```
 
@@ -45,21 +45,20 @@ sudo apt-get install nginx
 
 Build the project to generate static files
 ``` bash
-cd piclodio/front/
 ng build --prod --aot
 ```
 
 The last command wil generate a "dist" folder. Place it in the nginx web server and give all right to the nginx user
 ``` bash
-sudo cp -R dist/piclodio /var/www/piclodio
-sudo chown -R www-data: /var/www/piclodio
+sudo cp -R dist/piradio /var/www/piradio
+sudo chown -R www-data: /var/www/piradio
 ```
 
 ``` bash
 Edit the file default.conf `sudo nano /etc/nginx/sites-available/default.conf` and change the line
         root /var/www/html;
 with the following content
-        root /var/www/piclodio;
+        root /var/www/piradio;
 
 And the line
     location / {
@@ -71,4 +70,4 @@ with the following
         try_files $uri $uri/ /index.html;
     }
 ```
-Piclodio is now available from the address IP of your Raspberry Pi.
+Pi Radio is now available from the address IP of your Raspberry Pi.
