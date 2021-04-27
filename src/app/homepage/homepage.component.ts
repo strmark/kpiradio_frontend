@@ -35,8 +35,7 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit() {
         // get the active web radio
-        this.webRadioService.getAllWebRadios()
-            .subscribe(this.filterDefaultWebRadio.bind(this));
+        this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
         // get the player status
         this.playerService.getPlayerStatus().subscribe(this.setPlayerStatus.bind(this));
         // get the list of activated Alarm
@@ -87,9 +86,7 @@ export class HomepageComponent implements OnInit {
         }
         this.currentVolume.volume = newVolumeLevel
         this.volumeService.setVolume(this.currentVolume).subscribe(
-            success => {
-                this.refreshVolume();
-            },
+            success => this.refreshVolume(),
             error => console.log("Error " + error)
         );
     }
@@ -102,9 +99,7 @@ export class HomepageComponent implements OnInit {
         }
         this.currentVolume.volume = newVolumeLevel
         this.volumeService.setVolume(this.currentVolume).subscribe(
-            success => {
-                this.refreshVolume();
-            },
+            success => this.refreshVolume(),
             error => console.log("Error " + error)
         );
     }

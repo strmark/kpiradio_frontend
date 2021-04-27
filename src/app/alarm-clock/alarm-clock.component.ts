@@ -38,7 +38,7 @@ export class AlarmClockComponent implements OnInit {
     }
 
     create_range(maxVal: number): number[] {
-        var x = [];
+        const x = [];
         let i: number;
         for (i = 0; i <= maxVal; i++) {
             x.push(i)
@@ -106,9 +106,7 @@ export class AlarmClockComponent implements OnInit {
             this.alarmclock.isActive = true;
             console.log(this.alarmclock);
             this.alarmClockService.addAlarmClock(this.alarmclock).subscribe(
-                success => {
-                    this.refreshAlarmClockList();
-                },
+                success => this.refreshAlarmClockList(),
                 error => console.log("Error " + error)
             );
         } else {
@@ -117,9 +115,7 @@ export class AlarmClockComponent implements OnInit {
             this.alarmclock.minute = this.timePicker.minute;
 
             this.alarmClockService.updateAlarmClockById(this.alarmclock.id, this.alarmclock).subscribe(
-                success => {
-                    this.refreshAlarmClockList();
-                },
+                success => this.refreshAlarmClockList(),
                 error => console.log("Error " + error)
             );
         }

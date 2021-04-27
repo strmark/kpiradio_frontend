@@ -1,5 +1,5 @@
-import {Volume} from '../homepage/volume';
-import {GlobalVariable} from './../globals';
+import {Volume} from './volume';
+import {GlobalVariable} from '../globals';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';

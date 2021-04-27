@@ -12,17 +12,14 @@ export class WebRadioService {
     constructor(private httpService: HttpClient) {
     }
 
-    // GET /webradios
     getAllWebRadios(): Observable<WebRadio[]> {
         return this.httpService.get<WebRadio[]>(this.baseUrl + "/webradio/");
     }
 
-    // GET /webradios/:id
     getWebRadioById(id: number): Observable<WebRadio> {
         return this.httpService.get<WebRadio>(this.baseUrl + "/webradio/" + id);
     }
 
-    // POST /webradios
     addWebRadio(webradio: WebRadio): Observable<WebRadio> {
         console.log("addWebRadio");
         let body = JSON.stringify(webradio); // Stringify payload
@@ -31,7 +28,6 @@ export class WebRadioService {
         });
     }
 
-    // DELETE /webradios/:id
     deleteWebRadioById(id: number): Observable<any> {
         console.log("call delete service, delete webradio id " + id);
         return this.httpService.delete(this.baseUrl + "/webradio/" + id);
