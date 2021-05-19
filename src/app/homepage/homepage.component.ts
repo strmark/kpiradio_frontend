@@ -14,7 +14,6 @@ import {Volume} from "./volume";
     styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
     clock: number;
     active_webradios: any[];
     active_alarms: AlarmClock[];
@@ -79,12 +78,10 @@ export class HomepageComponent implements OnInit {
     }
 
     reduceVolume() {
-        let newVolumeLevel = this.currentVolume.volume;
-        newVolumeLevel = newVolumeLevel - 2;
-        if (newVolumeLevel < 0) {
-            newVolumeLevel = 0;
+        this.currentVolume.volume -= +2;
+        if (this.currentVolume.volume < 0) {
+            this.currentVolume.volume = 0;
         }
-        this.currentVolume.volume = newVolumeLevel
         this.volumeService.setVolume(this.currentVolume).subscribe(
             success => this.refreshVolume(),
             error => console.log("Error " + error)
@@ -92,12 +89,10 @@ export class HomepageComponent implements OnInit {
     }
 
     increaseVolume() {
-        let newVolumeLevel = this.currentVolume.volume;
-        newVolumeLevel = newVolumeLevel + 2;
-        if (newVolumeLevel > 100) {
-            newVolumeLevel = 100;
+        this.currentVolume.volume = +this.currentVolume.volume + +2;
+        if (+this.currentVolume.volume > +100) {
+            this.currentVolume.volume = 100;
         }
-        this.currentVolume.volume = newVolumeLevel
         this.volumeService.setVolume(this.currentVolume).subscribe(
             success => this.refreshVolume(),
             error => console.log("Error " + error)
