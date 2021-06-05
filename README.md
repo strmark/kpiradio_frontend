@@ -1,4 +1,4 @@
-# Pradio frontend
+# Pi Radio frontend
 
 This part of the project was written with Angular and was generated with [angular-cli](https://github.com/angular/angular-cli).
 
@@ -6,7 +6,7 @@ This part of the project was written with Angular and was generated with [angula
 
 ### Pre requisite
 
-Install nodejs 14x 
+Install nodejs 15x 
 ``` bash
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -25,7 +25,7 @@ sudo npm install -g @angular/cli
 Install dependencies
 ``` bash
 cd kpiradio_frontend
-sudo npm install
+npm install
 ```
 
 ### Run a development server
@@ -45,7 +45,7 @@ sudo apt-get install nginx
 
 Build the project to generate static files
 ``` bash
-ng build --prod --aot
+ng build --configuration production --aot
 ```
 
 The last command wil generate a "dist" folder. Place it in the nginx web server and give all right to the nginx user
@@ -55,7 +55,7 @@ sudo chown -R www-data: /var/www/piradio
 ```
 
 ``` bash
-Edit the file default.conf `sudo nano /etc/nginx/sites-available/default.conf` and change the line
+Edit the file default `sudo nano /etc/nginx/sites-available/default` and change the line
         root /var/www/html;
 with the following content
         root /var/www/piradio;
