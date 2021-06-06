@@ -6,7 +6,7 @@ This part of the project was written with Angular and was generated with [angula
 
 ### Pre requisite
 
-Install nodejs 15x 
+Install nodejs 14x 
 ``` bash
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
