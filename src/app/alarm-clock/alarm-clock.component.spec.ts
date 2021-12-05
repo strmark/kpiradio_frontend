@@ -1,5 +1,4 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-
 import {AlarmClockComponent} from './alarm-clock.component';
 
 describe('AlarmClockComponent', () => {

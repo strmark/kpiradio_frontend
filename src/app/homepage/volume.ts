@@ -4,5 +4,4 @@ export class Volume {
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }
-
 }

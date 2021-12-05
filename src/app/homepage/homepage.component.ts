@@ -6,7 +6,7 @@ import {PlayerService} from '../player/player.service';
 import {WebRadio} from '../web-radio/web-radio';
 import {WebRadioService} from '../web-radio/web-radio.service';
 import {VolumeService} from './volume.service';
-import {Volume} from "./volume";
+import {Volume} from './volume';
 
 @Component({
     selector: 'app-homepage',
@@ -15,12 +15,12 @@ import {Volume} from "./volume";
 })
 export class HomepageComponent implements OnInit {
     clock: number;
-    active_webradios: any[];
-    active_alarms: AlarmClock[];
-    all_webradios: any[];
+    activeWebradios: any[];
+    activeAlarms: AlarmClock[];
+    allWebradios: any[];
     player: Player;
-    playerLoaded: boolean = false;
-    volumeLoaded: boolean = false;
+    playerLoaded = false;
+    volumeLoaded = false;
     currentVolume: Volume = new Volume(70);
 
     constructor(private webRadioService: WebRadioService,
@@ -32,70 +32,66 @@ export class HomepageComponent implements OnInit {
         }, 1);
     }
 
-    ngOnInit() {
-        // get the active web radio
+    ngOnInit(): void {
         this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
-        // get the player status
         this.playerService.getPlayerStatus().subscribe(this.setPlayerStatus.bind(this));
-        // get the list of activated Alarm
         this.alarmClockService.getAllAlarmClocks().subscribe(this.setActiveAlarmClocks.bind(this));
-        // get the current volume
         this.refreshVolume();
     }
 
-    filterDefaultWebRadio(webradios: WebRadio[]) {
-        this.all_webradios = webradios;
+    filterDefaultWebRadio(webradios: WebRadio[]): void {
+        this.allWebradios = webradios;
         console.log(webradios);
-        this.active_webradios = this.all_webradios.filter(
+        this.activeWebradios = this.allWebradios.filter(
             webradio => webradio.default === true
-        )
+        );
     }
 
-    setPlayerStatus(player: Player) {
-        console.log("Player: " + player);
+    setPlayerStatus(player: Player): void {
+        console.log('Player: ' + player);
         this.player = player;
         this.playerLoaded = true;
     }
 
-    switchPlayerStatus(status: string) {
+    switchPlayerStatus(status: string): void {
         this.player.status = status;
         this.playerService.updatePlayer(this.player).subscribe(this.setPlayerStatus.bind(this));
     }
 
-    setActiveAlarmClocks(alarmclocks: AlarmClock[]) {
-        this.active_alarms = alarmclocks.filter(
+    setActiveAlarmClocks(alarmclocks: AlarmClock[]): void {
+        this.activeAlarms = alarmclocks.filter(
             alarms => alarms.isActive === true
-        )
+        );
     }
 
-    refreshVolume() {
+    refreshVolume(): void {
         this.volumeService.getVolume().subscribe(this.setVolume.bind(this));
     }
 
-    setVolume(volume: Volume) {
+    setVolume(volume: Volume): void {
         this.currentVolume = volume;
         this.volumeLoaded = true;
     }
 
-    reduceVolume() {
+    reduceVolume(): void {
         this.currentVolume.volume -= +2;
         if (this.currentVolume.volume < 0) {
             this.currentVolume.volume = 0;
         }
         this.volumeService.setVolume(this.currentVolume).subscribe(
-            success => this.refreshVolume(),
-            error => console.log("Error " + error)
+            () => this.refreshVolume(),
+            error => console.log('Error ' + error)
         );
     }
 
-    increaseVolume() {
+    increaseVolume(): void {
         this.currentVolume.volume = +this.currentVolume.volume + +2;
         if (+this.currentVolume.volume > +100) {
             this.currentVolume.volume = 100;
         }
         this.volumeService.setVolume(this.currentVolume).subscribe(
-            success => this.refreshVolume(),
-            error => console.log("Error " + error)
+            () => this.refreshVolume(),
+            error => console.log('Error ' + error)
         );
     }
 }

@@ -5,14 +5,14 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {PlayerService} from './player/player.service';
-import {AlarmClockService} from "./alarm-clock/alarm-clock.service";
+import {AlarmClockService} from './alarm-clock/alarm-clock.service';
 import {WebRadioService} from './web-radio/web-radio.service';
 
 import {AppComponent} from './app.component';
 import {HomepageComponent} from './homepage/homepage.component';
 import {WebRadioComponent} from './web-radio/web-radio.component';
 import {AlarmClockComponent} from './alarm-clock/alarm-clock.component';
-import {VolumeService} from "./homepage/volume.service";
+import {VolumeService} from './homepage/volume.service';
 
 @NgModule({
     declarations: [

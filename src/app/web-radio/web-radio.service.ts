@@ -13,30 +13,29 @@ export class WebRadioService {
     }
 
     getAllWebRadios(): Observable<WebRadio[]> {
-        return this.httpService.get<WebRadio[]>(this.baseUrl + "/webradio/");
+        return this.httpService.get<WebRadio[]>(this.baseUrl + '/webradio/');
     }
 
     getWebRadioById(id: number): Observable<WebRadio> {
-        return this.httpService.get<WebRadio>(this.baseUrl + "/webradio/" + id);
+        return this.httpService.get<WebRadio>(this.baseUrl + '/webradio/' + id);
     }
 
     addWebRadio(webradio: WebRadio): Observable<WebRadio> {
-        console.log("addWebRadio");
-        let body = JSON.stringify(webradio); // Stringify payload
-        return this.httpService.post<WebRadio>(this.baseUrl + "/webradio/", body, {
+        console.log('addWebRadio');
+        const body = JSON.stringify(webradio);
+        return this.httpService.post<WebRadio>(this.baseUrl + '/webradio/', body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }
 
     deleteWebRadioById(id: number): Observable<any> {
-        console.log("call delete service, delete webradio id " + id);
-        return this.httpService.delete(this.baseUrl + "/webradio/" + id);
+        console.log('call delete service, delete webradio id ' + id);
+        return this.httpService.delete(this.baseUrl + '/webradio/' + id);
     }
 
-    //  PUT /todos/:id
     updateWebRadioById(id: number, values: Object = {}): Observable<WebRadio> {
-        let body = JSON.stringify(values); // Stringify payload
-        return this.httpService.put<WebRadio>(this.baseUrl + "/webradio/" + id, body, {
+        const body = JSON.stringify(values);
+        return this.httpService.put<WebRadio>(this.baseUrl + '/webradio/' + id, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         });
     }

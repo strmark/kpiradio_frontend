@@ -1,5 +1,5 @@
 export class Player {
-    status: string = "off";
+    status = 'off';
     webradio: number;
 
     constructor(values: Object = {}) {
