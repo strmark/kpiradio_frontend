@@ -28,11 +28,7 @@ export class AlarmClockService {
         });
     }
 
-    getAlarmClockById(id: number): Observable<AlarmClock> {
-        return this.httpService.get<AlarmClock>(this.baseUrl + '/alarms/' + id);
-    }
-
-    updateAlarmClockById(id: number, values: Object = {}): Observable<AlarmClock> {
+    updateAlarmClockById(id: number, values: any = {}): Observable<AlarmClock> {
         const body = JSON.stringify(values);
         return this.httpService.put<AlarmClock>(this.baseUrl + '/alarms/' + id, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),

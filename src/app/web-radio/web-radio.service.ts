@@ -33,7 +33,7 @@ export class WebRadioService {
         return this.httpService.delete(this.baseUrl + '/webradio/' + id);
     }
 
-    updateWebRadioById(id: number, values: Object = {}): Observable<WebRadio> {
+    updateWebRadioById(id: number, values: any = {}): Observable<WebRadio> {
         const body = JSON.stringify(values);
         return this.httpService.put<WebRadio>(this.baseUrl + '/webradio/' + id, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
