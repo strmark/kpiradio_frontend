@@ -79,7 +79,7 @@ export class WebRadioComponent implements OnInit {
         player.webradio = webradio.id;
         this.playerService.updatePlayer(player).subscribe(
             () => {
-                this.router.navigate(['homepage']);
+                this.router.navigate(['homepage']).finally();
             },
             error => console.log('Error ' + error)
         );
