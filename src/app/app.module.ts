@@ -37,7 +37,7 @@ import {VolumeService} from './homepage/volume.service';
                 component: HomepageComponent
             },
             {
-                path: 'webradio',
+                path: 'webRadio',
                 component: WebRadioComponent
             },
             {

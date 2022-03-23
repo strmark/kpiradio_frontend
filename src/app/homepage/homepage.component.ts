@@ -15,9 +15,9 @@ import {Volume} from './volume';
 })
 export class HomepageComponent implements OnInit {
     clock: number;
-    activeWebradios: any[];
+    activeWebRadios: any[];
     activeAlarms: AlarmClock[];
-    allWebradios: any[];
+    allWebRadios: any[];
     player: Player;
     playerLoaded = false;
     volumeLoaded = false;
@@ -39,11 +39,11 @@ export class HomepageComponent implements OnInit {
         this.refreshVolume();
     }
 
-    filterDefaultWebRadio(webradios: WebRadio[]): void {
-        this.allWebradios = webradios;
-        console.log(webradios);
-        this.activeWebradios = this.allWebradios.filter(
-            webradio => webradio.default === true
+    filterDefaultWebRadio(webRadios: WebRadio[]): void {
+        this.allWebRadios = webRadios;
+        console.log(webRadios);
+        this.activeWebRadios = this.allWebRadios.filter(
+            webRadio => webRadio.default === true
         );
     }
 
@@ -58,8 +58,8 @@ export class HomepageComponent implements OnInit {
         this.playerService.updatePlayer(this.player).subscribe(this.setPlayerStatus.bind(this));
     }
 
-    setActiveAlarmClocks(alarmclocks: AlarmClock[]): void {
-        this.activeAlarms = alarmclocks.filter(
+    setActiveAlarmClocks(alarmClocks: AlarmClock[]): void {
+        this.activeAlarms = alarmClocks.filter(
             alarms => alarms.isActive === true
         );
     }
@@ -78,10 +78,10 @@ export class HomepageComponent implements OnInit {
         if (this.currentVolume.volume < 0) {
             this.currentVolume.volume = 0;
         }
-        this.volumeService.setVolume(this.currentVolume).subscribe(
-            () => this.refreshVolume(),
-            error => console.log('Error ' + error)
-        );
+        this.volumeService.setVolume(this.currentVolume).subscribe({
+            next: () => this.refreshVolume(),
+            error: error => console.log('Error ' + error)
+        });
     }
 
     increaseVolume(): void {
@@ -89,9 +89,9 @@ export class HomepageComponent implements OnInit {
         if (+this.currentVolume.volume > +100) {
             this.currentVolume.volume = 100;
         }
-        this.volumeService.setVolume(this.currentVolume).subscribe(
-            () => this.refreshVolume(),
-            error => console.log('Error ' + error)
-        );
+        this.volumeService.setVolume(this.currentVolume).subscribe({
+            next: () => this.refreshVolume(),
+            error: error => console.log('Error ' + error)
+        });
     }
 }

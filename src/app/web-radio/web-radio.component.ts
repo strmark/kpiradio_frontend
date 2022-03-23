@@ -23,8 +23,8 @@ export class WebRadioComponent implements OnInit {
     closeResult: string;
 
     newWebRadio: boolean;
-    webradio: WebRadio;
-    webradios: WebRadio[] = [];
+    webRadio: WebRadio;
+    webRadios: WebRadio[] = [];
     webRadioToDelete: WebRadio;
 
     private static getDismissReason(reason: any): string {
@@ -43,13 +43,15 @@ export class WebRadioComponent implements OnInit {
 
     deleteWebRadio(webRadioToDelete: WebRadio): void {
         console.log('Deleting' + webRadioToDelete);
-        this.webRadioService.deleteWebRadioById(webRadioToDelete.id).subscribe(() => this.refreshWebRadioList(),
-            error => console.log('error: ' + error));
+        this.webRadioService.deleteWebRadioById(webRadioToDelete.id).subscribe({
+            next: () => this.refreshWebRadioList(),
+            error: error => console.log('error: ' + error)
+        });
     }
 
-    confirmDeleteWebRadio(confDel, webradio: WebRadio): void {
+    confirmDeleteWebRadio(confDel, webRadio: WebRadio): void {
         console.log('confirmDeleteWebRadio clicked');
-        this.webRadioToDelete = webradio;
+        this.webRadioToDelete = webRadio;
         this.modalService.open(confDel, {ariaLabelledBy: 'modal-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
             if (result === 'yes click') {
@@ -62,59 +64,53 @@ export class WebRadioComponent implements OnInit {
         });
     }
 
-    setWebRadios(webradios: WebRadio[]): void {
-        console.log(webradios);
-        this.webradios = webradios;
+    setWebRadios(webRadios: WebRadio[]): void {
+        console.log(webRadios);
+        this.webRadios = webRadios;
     }
 
     refreshWebRadioList(): void {
-        console.log('Ververs de web radio list');
+        console.log('Renew the web radio list');
         this.webRadioService.getAllWebRadios().subscribe(this.setWebRadios.bind(this));
     }
 
-    playWebRadio(webradio: WebRadio): void {
-        console.log('Speel web radio id ' + webradio.id);
+    playWebRadio(webRadio: WebRadio): void {
+        console.log('Play the web radio id ' + webRadio.id);
         const player = new Player();
         player.status = 'on';
-        player.webradio = webradio.id;
-        this.playerService.updatePlayer(player).subscribe(
-            () => {
-                this.router.navigate(['homepage']).finally();
-            },
-            error => console.log('Error ' + error)
-        );
+        player.webRadio = webRadio.id;
+        this.playerService.updatePlayer(player).subscribe({
+            next: () => this.router.navigate(['homepage']).finally(),
+            error: error => console.log('Error ' + error)
+        });
     }
 
     save(): void {
         console.log('web-radio form: save clicked');
         if (this.newWebRadio) {
             console.log('Create new web radio');
-            console.log(this.webradio);
-            this.webRadioService.addWebRadio(this.webradio).subscribe(
-                () => {
-                    this.refreshWebRadioList();
-                },
-                error => console.log('Error ' + error)
-            );
+            console.log(this.webRadio);
+            this.webRadioService.addWebRadio(this.webRadio).subscribe({
+                next: () => this.refreshWebRadioList(),
+                error: error => console.log('Error ' + error)
+            });
         } else {
-            console.log('web-radio form: webradio with id ' + this.webradio.id + ' already exist. Call update service');
-            this.webRadioService.updateWebRadioById(this.webradio.id, this.webradio).subscribe(
-                () => {
-                    this.refreshWebRadioList();
-                },
-                error => console.log('Error ' + error)
-            );
+            console.log('web-radio form: webRadio with id ' + this.webRadio.id + ' already exist. Call update service');
+            this.webRadioService.updateWebRadioById(this.webRadio.id, this.webRadio).subscribe({
+                next: () => this.refreshWebRadioList(),
+                error: error => console.log('Error ' + error)
+            });
         }
         this.newWebRadio = false;
-        this.webradio = null;
+        this.webRadio = null;
     }
 
-    open(content, webradio: WebRadio): void {
-        if (webradio == null) {
-            this.webradio = new WebRadio();
+    open(content, webRadio: WebRadio): void {
+        if (webRadio == null) {
+            this.webRadio = new WebRadio();
             this.newWebRadio = true;
         } else {
-            this.webradio = webradio;
+            this.webRadio = webRadio;
             this.newWebRadio = false;
         }
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {

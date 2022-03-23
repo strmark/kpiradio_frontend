@@ -22,9 +22,9 @@ export class AlarmClockComponent implements OnInit {
 
     closeResult: string;
 
-    alarmclock: AlarmClock;
-    alarmclocks: AlarmClock[] = [];
-    webradios: WebRadio[] = [];
+    alarmClock: AlarmClock;
+    alarmClocks: AlarmClock[] = [];
+    webRadios: WebRadio[] = [];
 
     timePicker = {hour: 12, minute: 30};
 
@@ -57,19 +57,21 @@ export class AlarmClockComponent implements OnInit {
         return x;
     }
 
-    setWebRadios(webradios: WebRadio[]): void {
-        console.log(webradios);
-        this.webradios = webradios;
+    setWebRadios(webRadios: WebRadio[]): void {
+        console.log(webRadios);
+        this.webRadios = webRadios;
     }
 
-    deleteAlarmClock(alarmclock): void {
-        this.alarmClockService.deleteAlarmClockById(alarmclock.id).subscribe(() => this.refreshAlarmClockList(),
-            error => console.log('error: ' + error));
+    deleteAlarmClock(alarmClock): void {
+        this.alarmClockService.deleteAlarmClockById(alarmClock.id).subscribe({
+            next: () => this.refreshAlarmClockList(),
+            error: error => console.log('error: ' + error)
+        });
     }
 
-    confirmDeleteAlarmClock(confDel, alarmclock: AlarmClock): void {
+    confirmDeleteAlarmClock(confDel, alarmClock: AlarmClock): void {
         console.log('confirmDeleteAlarmClock clicked');
-        this.alarmClockToDelete = alarmclock;
+        this.alarmClockToDelete = alarmClock;
         this.modalService.open(confDel, {ariaLabelledBy: 'modal-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
             if (result === 'yes click') {
@@ -82,62 +84,60 @@ export class AlarmClockComponent implements OnInit {
         });
     }
 
-    setAlarmClocks(alarmclocks: AlarmClock[]): void {
-        this.alarmclocks = alarmclocks;
+    setAlarmClocks(alarmClocks: AlarmClock[]): void {
+        this.alarmClocks = alarmClocks;
     }
 
     refreshAlarmClockList(): void {
         this.alarmClockService.getAllAlarmClocks().subscribe(this.setAlarmClocks.bind(this));
     }
 
-    switchActiveAlarmClock(alarmclock: AlarmClock): void {
-        alarmclock.isActive = !alarmclock.isActive;
-        this.alarmClockService.updateAlarmClockById(alarmclock.id, alarmclock).subscribe(
-            () => {
-                this.refreshAlarmClockList();
-            },
-            error => console.log('Error ' + error)
-        );
+    switchActiveAlarmClock(alarmClock: AlarmClock): void {
+        alarmClock.isActive = !alarmClock.isActive;
+        this.alarmClockService.updateAlarmClockById(alarmClock.id, alarmClock).subscribe({
+            next: () => this.refreshAlarmClockList(),
+            error: error => console.log('Error ' + error)
+        });
     }
 
     save(): void {
         console.log('Alarm Clock: save clicked');
         if (this.newAlarmClock) {
             console.log('Create new alarm clock');
-            this.alarmclock.hour = this.timePicker.hour;
-            this.alarmclock.minute = this.timePicker.minute;
-            this.alarmclock.isActive = true;
-            console.log(this.alarmclock);
-            this.alarmClockService.addAlarmClock(this.alarmclock).subscribe(
-                () => this.refreshAlarmClockList(),
-                error => console.log('Error ' + error)
-            );
+            this.alarmClock.hour = this.timePicker.hour;
+            this.alarmClock.minute = this.timePicker.minute;
+            this.alarmClock.isActive = true;
+            console.log(this.alarmClock);
+            this.alarmClockService.addAlarmClock(this.alarmClock).subscribe({
+                next: () => this.refreshAlarmClockList(),
+                error: error => console.log('Error ' + error)
+            });
         } else {
-            console.log('alarm clock: alarm clock with id ' + this.alarmclock.id + ' already exist. Call update service');
-            this.alarmclock.hour = this.timePicker.hour;
-            this.alarmclock.minute = this.timePicker.minute;
+            console.log('alarm clock: alarm clock with id ' + this.alarmClock.id + ' already exist. Call update service');
+            this.alarmClock.hour = this.timePicker.hour;
+            this.alarmClock.minute = this.timePicker.minute;
 
-            this.alarmClockService.updateAlarmClockById(this.alarmclock.id, this.alarmclock).subscribe(
-                () => this.refreshAlarmClockList(),
-                error => console.log('Error ' + error)
-            );
+            this.alarmClockService.updateAlarmClockById(this.alarmClock.id, this.alarmClock).subscribe({
+                next: () => this.refreshAlarmClockList(),
+                error: error => console.log('Error ' + error)
+            });
         }
 
         this.newAlarmClock = false;
-        this.alarmclock = null;
+        this.alarmClock = null;
     }
 
-    open(content, alarmclock: AlarmClock): void {
-        if (alarmclock == null) {
+    open(content, alarmClock: AlarmClock): void {
+        if (alarmClock == null) {
             this.newAlarmClock = true;
-            this.alarmclock = new AlarmClock();
+            this.alarmClock = new AlarmClock();
             this.timePicker = {hour: 12, minute: 30};
-            this.alarmclock.autoStopMinutes = 180;
+            this.alarmClock.autoStopMinutes = 180;
         } else {
             this.newAlarmClock = false;
-            this.alarmclock = alarmclock;
-            this.timePicker.hour = this.alarmclock.hour;
-            this.timePicker.minute = this.alarmclock.minute;
+            this.alarmClock = alarmClock;
+            this.timePicker.hour = this.alarmClock.hour;
+            this.timePicker.minute = this.alarmClock.minute;
         }
         this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;

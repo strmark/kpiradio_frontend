@@ -1,7 +1,7 @@
 <h3>Internet Radio</h3>
 <div>
     <div class="table-responsive">
-        <table aria-describedby="Webradio" class="table table-striped">
+        <table aria-describedby="WebRadio" class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Name</th>
@@ -11,20 +11,20 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let webradio of webradios">
-                <td class="text-center">{{webradio.name}}</td>
+            <tr *ngFor="let webRadio of webRadios">
+                <td class="text-center">{{webRadio.name}}</td>
                 <td class="text-center">
-                    <button (click)="playWebRadio(webradio)" type="button" class="btn btn-success btn-md">
+                    <button (click)="playWebRadio(webRadio)" type="button" class="btn btn-success btn-md">
                         <span class="fa fa-play"></span>
                     </button>
                 </td>
                 <td class="text-center">
-                    <button class="btn btn-default btn-md" (click)="open(content, webradio)">
+                    <button class="btn btn-default btn-md" (click)="open(content, webRadio)">
                         <span class="fa fa-edit"></span>
                     </button>
                 </td>
                 <td class="text-center">
-                    <button (click)="confirmDeleteWebRadio(confDel, webradio)" type="button"
+                    <button (click)="confirmDeleteWebRadio(confDel, webRadio)" type="button"
                             class="btn btn-danger btn-md">
                         <span class="fa fa-trash"></span>
                     </button>
@@ -34,7 +34,7 @@
         </table>
     </div>
     <div>
-        <button (click)="open(content,webradio=null)" type="button" class="btn btn-outline-dark btn-md">
+        <button (click)="open(content,webRadio=null)" type="button" class="btn btn-outline-dark btn-md">
             <span class="fa fa-plus"> Add</span>
         </button>
     </div>
@@ -43,23 +43,23 @@
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Internet Radio</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body" *ngIf="webradio">
+    <div class="modal-body" *ngIf="webRadio">
         <form name="content">
             <div class="form-group">
                 <div class="input-group">
                     <div class="container col-md-12">
                         <div class="row">
                             <div class="col-md-3"><label for="name">Name</label></div>
-                            <div class="col-md-9"><input id="name" class="form-control" [(ngModel)]="webradio.name"
+                            <div class="col-md-9"><input id="name" class="form-control" [(ngModel)]="webRadio.name"
                                                          name="name"/></div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"><label for="url">URL</label></div>
-                            <div class="col-md-9"><input id="url" class="form-control" [(ngModel)]="webradio.url"
+                            <div class="col-md-9"><input id="url" class="form-control" [(ngModel)]="webRadio.url"
                                                          name="url"/></div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
     <div class="modal-header">
         <h4 class="modal-title" id="modal-title">Internet Radio deletion</h4>
         <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
-                (click)="modal.dismiss('Cross click')">
+                (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -86,7 +86,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('yes click')">Yes</button>
-        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('no click')">No</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">No</button>
     </div>
 </ng-template>
 

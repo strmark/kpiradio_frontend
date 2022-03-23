@@ -12,7 +12,7 @@ export class AlarmClock {
     minute: number;
     autoStopMinutes: number;
     isActive = false;
-    webradio: number;
+    webRadio: number;
 
     constructor(values: any = {}) {
         Object.assign(this, values);
