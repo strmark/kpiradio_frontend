@@ -40,28 +40,27 @@
 </div>
 <br>
 <div *ngIf="playerLoaded">
+    <div class="d-grid gap-2">
     <button (click)="switchPlayerStatus('on')" type="button"
             class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">Start
     </button>
     <button (click)="switchPlayerStatus('off')" type="button"
             class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">Stop
     </button>
+    </div>
 </div>
 <br>
 <h3>Volume</h3>
 <div *ngIf="volumeLoaded">
-    <ngb-progressbar type="success" height="30px" value="{{currentVolume.volume}}">{{currentVolume.volume}}%
+    <div class="d-grid gap-3">
+    <ngb-progressbar type="success" height="50px" value="{{currentVolume.volume}}">{{currentVolume.volume}}%
     </ngb-progressbar>
-    <div class="row">
-        <div class="col-md-6">
+
             <button (click)="reduceVolume()" type="button" class="btn btn-secondary btn-md btn-block">
                 <span class="fa fa-volume-down" aria-hidden="true"> Down</span>
             </button>
-        </div>
-        <div class="col-md-6">
             <button (click)="increaseVolume()" type="button" class="btn btn-secondary btn-md btn-block">
                 <span class="fa fa-volume-up" aria-hidden="true"> Up</span>
             </button>
-        </div>
     </div>
 </div>
