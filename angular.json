@@ -139,5 +139,7 @@
       }
     }
   },
-  "defaultProject": "piradio"
+  "cli": {
+    "analytics": false
+  }
 }
