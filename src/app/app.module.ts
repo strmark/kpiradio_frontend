@@ -44,7 +44,7 @@ import {VolumeService} from './homepage/volume.service';
                 path: 'alarm',
                 component: AlarmClockComponent
             }
-        ], {relativeLinkResolution: 'legacy'})
+        ], {})
     ],
     providers: [WebRadioService, AlarmClockService, PlayerService, VolumeService],
     bootstrap: [AppComponent]
