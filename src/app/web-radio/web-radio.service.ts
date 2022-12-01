@@ -13,13 +13,13 @@ export class WebRadioService {
     }
 
     getAllWebRadios(): Observable<WebRadio[]> {
-        return this.httpService.get<WebRadio[]>(this.baseUrl + '/webRadio/');
+        return this.httpService.get<WebRadio[]>(this.baseUrl + '/webRadio');
     }
 
     addWebRadio(webRadio: WebRadio): Observable<WebRadio> {
         console.log('addWebRadio');
         const body = JSON.stringify(webRadio);
-        return this.httpService.post<WebRadio>(this.baseUrl + '/webRadio/', body, {
+        return this.httpService.post<WebRadio>(this.baseUrl + '/webRadio', body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }

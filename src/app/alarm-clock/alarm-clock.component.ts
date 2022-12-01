@@ -31,7 +31,6 @@ export class AlarmClockComponent implements OnInit {
     maxAutoStopMinute: number[];
 
     newAlarmClock: boolean;
-    message: string;
     alarmClockToDelete: AlarmClock;
 
     private static getDismissReason(reason: any): string {

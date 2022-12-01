@@ -13,12 +13,12 @@ export class PlayerService {
     }
 
     getPlayerStatus(): Observable<Player> {
-        return this.httpService.get<Player>(this.baseUrl + '/player/');
+        return this.httpService.get<Player>(this.baseUrl + '/player');
     }
 
     updatePlayer(player: Player): Observable<Player> {
-        const body = JSON.stringify(player); // Stringify payload
-        return this.httpService.post<Player>(this.baseUrl + '/player/', body, {
+        const body = JSON.stringify(player);
+        return this.httpService.post<Player>(this.baseUrl + '/player', body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         });
     }
