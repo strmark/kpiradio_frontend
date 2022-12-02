@@ -13,7 +13,7 @@ export class AlarmClockService {
     }
 
     getAllAlarmClocks(): Observable<AlarmClock[]> {
-        return this.httpService.get<AlarmClock[]>(this.baseUrl + '/alarms/');
+        return this.httpService.get<AlarmClock[]>(this.baseUrl + '/alarms');
     }
 
     deleteAlarmClockById(id: number): Observable<any> {
@@ -22,8 +22,8 @@ export class AlarmClockService {
     }
 
     addAlarmClock(alarmClock: AlarmClock): Observable<AlarmClock> {
-        const body = JSON.stringify(alarmClock); // Stringify payload
-        return this.httpService.post<AlarmClock>(this.baseUrl + '/alarms/', body, {
+        const body = JSON.stringify(alarmClock);
+        return this.httpService.post<AlarmClock>(this.baseUrl + '/alarms', body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         });
     }
