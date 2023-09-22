@@ -29,7 +29,8 @@
             <td class="{{ active_alarm.saturday  ? 'alarm-on' : 'alarm-off' }}"></td>
             <td class="{{ active_alarm.sunday  ? 'alarm-on' : 'alarm-off' }}"></td>
             <td class="text-center">{{ active_alarm.hour < 10 ? '0' : '' }}{{active_alarm.hour}}
-                :{{ active_alarm.minute < 10 ? '0' : '' }}{{active_alarm.minute}}</td>
+                :{{ active_alarm.minute < 10 ? '0' : '' }}{{active_alarm.minute}}
+            </td>
         </tr>
         </tbody>
     </table>
@@ -43,26 +44,21 @@
     <div class="d-grid gap-2">
         <button (click)="switchPlayerStatus('on')" type="button"
                 class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">
-            Start
+            <span class="fa fa-play"> Start</span>
         </button>
         <button (click)="switchPlayerStatus('off')" type="button"
                 class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">
-            Stop
+            <span class="fa fa-stop"> Stop</span>
         </button>
     </div>
 </div>
 <br>
 <h3>Volume</h3>
-<div *ngIf="volumeLoaded">
-    <div class="d-grid gap-3">
-        <ngb-progressbar type="success" height="50px" value="{{currentVolume.volume}}">{{currentVolume.volume}}%
-        </ngb-progressbar>
-
-        <button (click)="reduceVolume()" type="button" class="btn btn-secondary btn-md btn-block">
-            <span class="fa fa-volume-down" aria-hidden="true"> Down</span>
-        </button>
-        <button (click)="increaseVolume()" type="button" class="btn btn-secondary btn-md btn-block">
-            <span class="fa fa-volume-up" aria-hidden="true"> Up</span>
-        </button>
-    </div>
+<div class="d-grid gap-3">
+    <button (click)="reduceVolume()" type="button" class="btn btn-lg btn-outline-dark btn-block">
+        <span class="fa fa-volume-down"> Down</span>
+    </button>
+    <button (click)="increaseVolume()" type="button" class="btn btn-lg btn-outline-dark btn-block">
+        <span class="fa fa-volume-up"> Up</span>
+    </button>
 </div>

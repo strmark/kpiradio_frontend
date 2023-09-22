@@ -1,7 +1,5 @@
-import {Volume} from './volume';
 import {GlobalVariable} from '../globals';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 
 @Injectable()
@@ -12,13 +10,14 @@ export class VolumeService {
     constructor(private httpService: HttpClient) {
     }
 
-    getVolume(): Observable<Volume> {
-        return this.httpService.get<Volume>(this.baseUrl + '/volume');
+    volumeDown() {
+        return this.httpService.post(this.baseUrl + '/volumeDown', "", {
+            headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        });
     }
 
-    setVolume(volume: Volume): Observable<Volume> {
-        const body = JSON.stringify(volume);
-        return this.httpService.post<Volume>(this.baseUrl + '/volume', body, {
+    volumeUp() {
+        return this.httpService.post(this.baseUrl + '/volumeUp', "", {
             headers: new HttpHeaders().set('Content-Type', 'application/json'),
         });
     }

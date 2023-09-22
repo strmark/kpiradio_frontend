@@ -6,7 +6,6 @@ import {PlayerService} from '../player/player.service';
 import {WebRadio} from '../web-radio/web-radio';
 import {WebRadioService} from '../web-radio/web-radio.service';
 import {VolumeService} from './volume.service';
-import {Volume} from './volume';
 
 @Component({
     selector: 'app-homepage',
@@ -20,8 +19,6 @@ export class HomepageComponent implements OnInit {
     allWebRadios: any[];
     player: Player;
     playerLoaded = false;
-    volumeLoaded = false;
-    currentVolume: Volume = new Volume(70);
 
     constructor(private webRadioService: WebRadioService,
                 private playerService: PlayerService,
@@ -36,7 +33,6 @@ export class HomepageComponent implements OnInit {
         this.webRadioService.getAllWebRadios().subscribe(this.filterDefaultWebRadio.bind(this));
         this.playerService.getPlayerStatus().subscribe(this.setPlayerStatus.bind(this));
         this.alarmClockService.getAllAlarmClocks().subscribe(this.setActiveAlarmClocks.bind(this));
-        this.refreshVolume();
     }
 
     filterDefaultWebRadio(webRadios: WebRadio[]): void {
@@ -64,34 +60,11 @@ export class HomepageComponent implements OnInit {
         );
     }
 
-    refreshVolume(): void {
-        this.volumeService.getVolume().subscribe(this.setVolume.bind(this));
-    }
-
-    setVolume(volume: Volume): void {
-        this.currentVolume = volume;
-        this.volumeLoaded = true;
-    }
-
     reduceVolume(): void {
-        this.currentVolume.volume -= +2;
-        if (this.currentVolume.volume < 0) {
-            this.currentVolume.volume = 0;
-        }
-        this.volumeService.setVolume(this.currentVolume).subscribe({
-            next: () => this.refreshVolume(),
-            error: error => console.log('Error ' + error)
-        });
+        this.volumeService.volumeDown().subscribe();
     }
 
     increaseVolume(): void {
-        this.currentVolume.volume = +this.currentVolume.volume + +2;
-        if (+this.currentVolume.volume > +100) {
-            this.currentVolume.volume = 100;
-        }
-        this.volumeService.setVolume(this.currentVolume).subscribe({
-            next: () => this.refreshVolume(),
-            error: error => console.log('Error ' + error)
-        });
+        this.volumeService.volumeUp().subscribe();
     }
 }
