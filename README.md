@@ -6,12 +6,8 @@ This part of the project was written with Angular and was generated with [angula
 
 ### Pre requisite
 
-Install nodejs 17x 
-``` bash
-curl -sL https://deb.nodesource.com/setup_17.x | sudo -E bash -
-sudo apt-get install -y nodejs
-node --version
-```
+Install nodejs 18x. Follow the instructions from https://github.com/nodesource/distributions 
+
 Clone the project
 ``` bash
 git clone https://github.com/strmark/kpiradio_frontend.git
