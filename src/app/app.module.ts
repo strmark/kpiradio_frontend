@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {PlayerService} from './player/player.service';
 import {AlarmClockService} from './alarm-clock/alarm-clock.service';
 import {WebRadioService} from './web-radio/web-radio.service';
@@ -14,19 +14,16 @@ import {WebRadioComponent} from './web-radio/web-radio.component';
 import {AlarmClockComponent} from './alarm-clock/alarm-clock.component';
 import {VolumeService} from './homepage/volume.service';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         HomepageComponent,
         WebRadioComponent,
         AlarmClockComponent,
     ],
-    imports: [
-        NgbModule,
+    bootstrap: [AppComponent], imports: [NgbModule,
         NgbModalModule,
         BrowserModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forRoot([
             {
                 path: '',
@@ -44,10 +41,6 @@ import {VolumeService} from './homepage/volume.service';
                 path: 'alarm',
                 component: AlarmClockComponent
             }
-        ], {})
-    ],
-    providers: [WebRadioService, AlarmClockService, PlayerService, VolumeService],
-    bootstrap: [AppComponent]
-})
+        ], {})], providers: [WebRadioService, AlarmClockService, PlayerService, VolumeService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }

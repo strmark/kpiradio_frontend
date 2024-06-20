@@ -1,5 +1,5 @@
 import {GlobalVariable} from '../globals';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 
 @Injectable()
