@@ -8,7 +8,8 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'app-alarm-clock',
     templateUrl: './alarm-clock.component.html',
-    styleUrls: ['./alarm-clock.component.css']
+    styleUrls: ['./alarm-clock.component.css'],
+    standalone: false
 })
 export class AlarmClockComponent implements OnInit {
 

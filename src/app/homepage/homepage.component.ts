@@ -10,7 +10,8 @@ import {VolumeService} from './volume.service';
 @Component({
     selector: 'app-homepage',
     templateUrl: './homepage.component.html',
-    styleUrls: ['./homepage.component.css']
+    styleUrls: ['./homepage.component.css'],
+    standalone: false
 })
 export class HomepageComponent implements OnInit {
     clock: number;

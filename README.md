@@ -21,7 +21,7 @@ sudo npm install -g @angular/cli
 Install dependencies
 ``` bash
 cd kpiradio_frontend
-npm install
+npm install --legacy-peer-deps
 ```
 
 ### Run a development server
