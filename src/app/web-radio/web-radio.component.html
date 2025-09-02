@@ -15,18 +15,18 @@
                 <td class="text-center">{{webRadio.name}}</td>
                 <td class="text-center">
                     <button (click)="playWebRadio(webRadio)" type="button" class="btn btn-success btn-md">
-                        <span class="fa fa-play"></span>
+                        <i class="fa fa-play"></i>
                     </button>
                 </td>
                 <td class="text-center">
                     <button class="btn btn-default btn-md" (click)="open(content, webRadio)">
-                        <span class="fa fa-edit"></span>
+                        <i class="fa fa-edit"></i>
                     </button>
                 </td>
                 <td class="text-center">
                     <button (click)="confirmDeleteWebRadio(confDel, webRadio)" type="button"
                             class="btn btn-danger btn-md">
-                        <span class="fa fa-trash"></span>
+                        <i class="fa fa-trash"></i>
                     </button>
                 </td>
             </tr>
@@ -35,7 +35,7 @@
     </div>
     <div>
         <button (click)="open(content,webRadio=null)" type="button" class="btn btn-outline-dark btn-md">
-            <span class="fa fa-plus"> Add</span>
+            <i class="fa fa-plus"></i> Add
         </button>
     </div>
 </div>

@@ -42,13 +42,11 @@
 <br>
 <div *ngIf="playerLoaded">
     <div class="d-grid gap-2">
-        <button (click)="switchPlayerStatus('on')" type="button"
-                class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">
-            <span class="fa fa-play"> Start</span>
+        <button (click)="switchPlayerStatus('on')" type="button" class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">
+            <i class="fa fa-play"></i> Start
         </button>
-        <button (click)="switchPlayerStatus('off')" type="button"
-                class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">
-            <span class="fa fa-stop"> Stop</span>
+        <button (click)="switchPlayerStatus('off')" type="button" class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">
+            <i class="fa fa-stop"></i>  Stop
         </button>
     </div>
 </div>
@@ -56,9 +54,9 @@
 <h3>Volume</h3>
 <div class="d-grid gap-3">
     <button (click)="reduceVolume()" type="button" class="btn btn-lg btn-outline-dark btn-block">
-        <span class="fa fa-volume-down"> Down</span>
+        <i class="fa fa-volume-down"></i> Down
     </button>
     <button (click)="increaseVolume()" type="button" class="btn btn-lg btn-outline-dark btn-block">
-        <span class="fa fa-volume-up"> Up</span>
+        <i class="fa fa-volume-up"></i>  Up
     </button>
 </div>

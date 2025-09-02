@@ -5,20 +5,20 @@
     </h1>
 </div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="homepage">Pi Radio</a>
+    <a class="navbar-brand" routerLink="homepage"> Pi Radio</a>
     <button class="navbar-toggler" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="!isNavbarCollapsed" class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link fa-solid fa-house" routerLink="/homepage" routerLinkActive="active"> Homepage</a>
+                <a class="nav-link" routerLink="/homepage" routerLinkActive="active"><i class="fa-solid fa-house"></i> Homepage</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fa-solid fa-music" routerLink="/webRadio" routerLinkActive="active"> Internet Radio</a>
+                <a class="nav-link" routerLink="/webRadio" routerLinkActive="active"><i class="fa-solid fa-music"></i> Internet Radio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fa-solid fa-bell" routerLink="/alarm" routerLinkActive="active"> Alarm</a>
+                <a class="nav-link" routerLink="/alarm" routerLinkActive="active"><i class="fa-solid fa-bell"> </i> Alarm</a>
             </li>
         </ul>
     </div>
