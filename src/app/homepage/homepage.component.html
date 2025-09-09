@@ -1,6 +1,6 @@
 <h3>Time</h3>
 <div class="card card-body bg-light">
-    <strong>{{clock | date: 'HH:mm:ss'}}</strong>
+    <strong>{{ clock | date: 'HH:mm:ss' }}</strong>
 </div>
 
 <h3>Active alarms</h3>
@@ -19,36 +19,42 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let active_alarm of activeAlarms">
-            <td class="text-center">{{active_alarm.name}}</td>
-            <td class="{{ active_alarm.monday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.tuesday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.wednesday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.thursday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.friday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.saturday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="{{ active_alarm.sunday  ? 'alarm-on' : 'alarm-off' }}"></td>
-            <td class="text-center">{{ active_alarm.hour < 10 ? '0' : '' }}{{active_alarm.hour}}
-                :{{ active_alarm.minute < 10 ? '0' : '' }}{{active_alarm.minute}}
-            </td>
-        </tr>
+            @for (active_alarm of activeAlarms; track active_alarm.id) {
+                <tr>
+                    <td class="text-center">{{ active_alarm.name }}</td>
+                    <td class="{{ active_alarm.monday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.tuesday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.wednesday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.thursday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.friday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.saturday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="{{ active_alarm.sunday  ? 'alarm-on' : 'alarm-off' }}"></td>
+                    <td class="text-center">{{ active_alarm.hour < 10 ? '0' : '' }}{{ active_alarm.hour }}
+                        :{{ active_alarm.minute < 10 ? '0' : '' }}{{ active_alarm.minute }}
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
 <h3>Player</h3>
-<div class="card card-body bg-light"
-     *ngFor="let active_webRadio of activeWebRadios">{{active_webRadio.name}}
+<div class="card card-body bg-light">
+    @for (active_webRadio of activeWebRadios; track active_webRadio.id) {
+        {{ active_webRadio.name }}
+    }
 </div>
 <br>
-<div *ngIf="playerLoaded">
-    <div class="d-grid gap-2">
-        <button (click)="switchPlayerStatus('on')" type="button" class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">
-            <i class="fa fa-play"></i> Start
-        </button>
-        <button (click)="switchPlayerStatus('off')" type="button" class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">
-            <i class="fa fa-stop"></i>  Stop
-        </button>
-    </div>
+<div>
+    @if (playerLoaded) {
+        <div class="d-grid gap-2">
+            <button (click)="switchPlayerStatus('on')" type="button" class="btn btn-{{ player.status == 'on' ? 'success' : 'default' }} btn-lg btn-outline-dark btn-block">
+                <i class="fa fa-play"></i> Start
+            </button>
+            <button (click)="switchPlayerStatus('off')" type="button" class="btn btn-{{ player.status == 'off' ? 'danger' : 'default' }} btn-lg btn-outline-dark btn-block">
+                <i class="fa fa-stop"></i> Stop
+            </button>
+        </div>
+    }
 </div>
 <br>
 <h3>Volume</h3>
@@ -57,6 +63,6 @@
         <i class="fa fa-volume-down"></i> Down
     </button>
     <button (click)="increaseVolume()" type="button" class="btn btn-lg btn-outline-dark btn-block">
-        <i class="fa fa-volume-up"></i>  Up
+        <i class="fa fa-volume-up"></i> Up
     </button>
 </div>

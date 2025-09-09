@@ -15,37 +15,40 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let alarmClock of alarmClocks">
-                <td class="text-center">{{alarmClock.name}}</td>
-                <td class="text-center">
-                    <div><span class="{{ alarmClock.monday ? 'day-on' : 'day-off' }}">Mo</span></div>
-                    <div><span class="{{ alarmClock.tuesday ? 'day-on' : 'day-off' }}">Tu</span></div>
-                    <div><span class="{{ alarmClock.wednesday ? 'day-on' : 'day-off' }}">We</span></div>
-                    <div><span class="{{ alarmClock.thursday ? 'day-on' : 'day-off' }}">Th</span></div>
-                    <div><span class="{{ alarmClock.friday ? 'day-on' : 'day-off' }}">Fr</span></div>
-                    <div><span class="{{ alarmClock.saturday ? 'day-on' : 'day-off' }}">Sa</span></div>
-                    <div><span class="{{ alarmClock.sunday ? 'day-on' : 'day-off' }}">Su</span></div>
-                </td>
-                <td class="text-center">{{ alarmClock.hour < 10 ? '0' : '' }}{{alarmClock.hour}}
-                    :{{ alarmClock.minute < 10 ? '0' : '' }}{{alarmClock.minute}}</td>
-                <td class="text-center">{{alarmClock.autoStopMinutes}}</td>
-                <td class="text-center">
-                    <button class="btn btn-default btn-md" (click)="open(content,alarmClock)">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button (click)="switchActiveAlarmClock(alarmClock)" type="button"
-                            class="btn btn-{{ alarmClock.isActive ? 'success' : 'default' }} btn-md">
-                        <i class="fa {{ alarmClock.isActive ? 'fa-check' : 'fa-ban' }}"></i>
-                    </button>
-                </td>
-                <td class="text-center">
-                    <button (click)="confirmDeleteAlarmClock(confDel, alarmClock)" class="btn btn-danger btn-md">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
+                @for (alarmClock of alarmClocks; track alarmClock.id) {
+                    <tr>
+                        <td class="text-center">{{ alarmClock.name }}</td>
+                        <td class="text-center">
+                            <div><span class="{{ alarmClock.monday ? 'day-on' : 'day-off' }}">Mo</span></div>
+                            <div><span class="{{ alarmClock.tuesday ? 'day-on' : 'day-off' }}">Tu</span></div>
+                            <div><span class="{{ alarmClock.wednesday ? 'day-on' : 'day-off' }}">We</span></div>
+                            <div><span class="{{ alarmClock.thursday ? 'day-on' : 'day-off' }}">Th</span></div>
+                            <div><span class="{{ alarmClock.friday ? 'day-on' : 'day-off' }}">Fr</span></div>
+                            <div><span class="{{ alarmClock.saturday ? 'day-on' : 'day-off' }}">Sa</span></div>
+                            <div><span class="{{ alarmClock.sunday ? 'day-on' : 'day-off' }}">Su</span></div>
+                        </td>
+                        <td class="text-center">{{ alarmClock.hour < 10 ? '0' : '' }}{{ alarmClock.hour }}
+                            :{{ alarmClock.minute < 10 ? '0' : '' }}{{ alarmClock.minute }}
+                        </td>
+                        <td class="text-center">{{ alarmClock.autoStopMinutes }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-default btn-md" (click)="open(content,alarmClock)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button (click)="switchActiveAlarmClock(alarmClock)" type="button"
+                                    class="btn btn-{{ alarmClock.isActive ? 'success' : 'default' }} btn-md">
+                                <i class="fa {{ alarmClock.isActive ? 'fa-check' : 'fa-ban' }}"></i>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button (click)="confirmDeleteAlarmClock(confDel, alarmClock)" class="btn btn-danger btn-md">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -63,71 +66,59 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body" *ngIf="alarmClock">
-        <form name="content">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="container col-md-12">
-                        <div class="row">
-                            <div class="col-md-3"><label for="name">Name</label></div>
-                            <div class="col-md-9"><input id="name" class="form-control" [(ngModel)]="alarmClock.name"
-                                                         name="name"/></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"><label for="dayOfWeek">Day of the week</label></div>
-                            <div class="col-md-9">
-                                <div><label for="monday"> <input type="checkbox" name="monday" label="Monday"
-                                                                 [(ngModel)]="alarmClock.monday" binary="true"> Monday
-                                </label></div>
-                                <div><label for="tuesday"> <input type="checkbox" name="tuesday" label="Tuesday"
-                                                                  [(ngModel)]="alarmClock.tuesday" binary="true">
-                                    Tuesday </label></div>
-                                <div><label for="wednesday"> <input type="checkbox" name="wednesday" label="Wednesday"
-                                                                    [(ngModel)]="alarmClock.wednesday" binary="true">
-                                    Wednesday </label></div>
-                                <div><label for="thursday"> <input type="checkbox" name="thursday" label="Thursday"
-                                                                   [(ngModel)]="alarmClock.thursday" binary="true">
-                                    Thursday </label></div>
-                                <div><label for="friday"> <input type="checkbox" name="friday" label="Friday"
-                                                                 [(ngModel)]="alarmClock.friday" binary="true"> Friday
-                                </label></div>
-                                <div><label for="saturday"> <input type="checkbox" name="saturday" label="Saturday"
-                                                                   [(ngModel)]="alarmClock.saturday" binary="true">
-                                    Saturday </label></div>
-                                <div><label for="sunday"> <input type="checkbox" name="sunday" label="Sunday"
-                                                                 [(ngModel)]="alarmClock.sunday" binary="true"> Sunday
-                                </label></div>
+    <div class="modal-body">
+        @if (alarmClock) {
+            <form name="content">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="container col-md-12">
+                            <div class="row">
+                                <div class="col-md-3"><label for="name">Name</label></div>
+                                <div class="col-md-9"><input id="name" class="form-control" [(ngModel)]="alarmClock.name" name="name"/></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"><label for="time">Time</label></div>
-                            <div class="col-md-9">
-                                <ngb-timepicker [(ngModel)]="timePicker" name="timePicker"></ngb-timepicker>
+                            <div class="row">
+                                <div class="col-md-3"><label for="dayOfWeek">Day of the week</label></div>
+                                <div class="col-md-9">
+                                    <div><label for="monday"> <input type="checkbox" name="monday" label="Monday" [(ngModel)]="alarmClock.monday" binary="true"> Monday</label></div>
+                                    <div><label for="tuesday"> <input type="checkbox" name="tuesday" label="Tuesday" [(ngModel)]="alarmClock.tuesday" binary="true"> Tuesday</label></div>
+                                    <div><label for="wednesday"> <input type="checkbox" name="wednesday" label="Wednesday" [(ngModel)]="alarmClock.wednesday" binary="true"> Wednesday</label></div>
+                                    <div><label for="thursday"> <input type="checkbox" name="thursday" label="Thursday" [(ngModel)]="alarmClock.thursday" binary="true"> Thursday</label></div>
+                                    <div><label for="friday"> <input type="checkbox" name="friday" label="Friday" [(ngModel)]="alarmClock.friday" binary="true"> Friday</label></div>
+                                    <div><label for="saturday"> <input type="checkbox" name="saturday" label="Saturday" [(ngModel)]="alarmClock.saturday" binary="true"> Saturday </label></div>
+                                    <div><label for="sunday"> <input type="checkbox" name="sunday" label="Sunday" [(ngModel)]="alarmClock.sunday" binary="true" >Sunday</label></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"><label for="autoStop">Auto Stop</label></div>
-                            <div class="col-md-9">
-                                <select class="form-control" id="autoStopMinutes" required
-                                        [(ngModel)]="alarmClock.autoStopMinutes" name="autoStopMinutes">
-                                    <option *ngFor="let minute of maxAutoStopMinute"
-                                            [ngValue]="minute">{{minute}}</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-md-3"><label for="time">Time</label></div>
+                                <div class="col-md-9">
+                                    <ngb-timepicker [(ngModel)]="timePicker" name="timePicker"></ngb-timepicker>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"><label for="webRadio">Internet Radio</label></div>
-                            <div class="col-md-9">
-                                <select id="webRadio" required [(ngModel)]="alarmClock.webRadio" name="webRadio.name">
-                                    <option *ngFor="let webRadio of webRadios"
-                                            [ngValue]="webRadio.id">{{webRadio.name}}</option>
-                                </select>
+                            <div class="row">
+                                <div class="col-md-3"><label for="autoStop">Auto Stop</label></div>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="autoStopMinutes" required [(ngModel)]="alarmClock.autoStopMinutes" name="autoStopMinutes">
+                                        @for (minute of maxAutoStopMinute; track minute) {
+                                            <option>{{ minute }}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3"><label for="webRadio">Internet Radio</label></div>
+                                <div class="col-md-9">
+                                    <select id="webRadio" required [(ngModel)]="alarmClock.webRadio" name="webRadio.name">
+                                        @for (webRadio of webRadios; track webRadio) {
+                                            <option [ngValue]="webRadio.id">{{ webRadio.name }}</option>
+                                        }
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        }
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
@@ -142,9 +133,10 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body" *ngIf="alarmClockToDelete">
-        <p><strong>Are you sure you want to delete alarm: <span class="text-primary">{{alarmClockToDelete.name}}</span>
-            ?</strong></p>
+    <div class="modal-body">
+        @if (alarmClockToDelete) {
+            <p><strong>Are you sure you want to delete alarm: <span class="text-primary">{{ alarmClockToDelete.name }}</span>?</strong></p>
+        }
     </div>
     <div class="modal-footer">
         <button type="button" ngbAutofocus class="btn btn-danger" (click)="modal.close('yes click')">Yes</button>

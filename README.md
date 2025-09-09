@@ -6,7 +6,7 @@ This part of the project was written with Angular and was generated with [angula
 
 ### Pre requisite
 
-Install nodejs 18x. Follow the instructions from https://github.com/nodesource/distributions 
+Install Node.js 18x. Follow the instructions from https://github.com/nodesource/distributions 
 
 Clone the project
 ``` bash
