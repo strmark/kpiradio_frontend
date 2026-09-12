@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {NgbModalModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import {PlayerService} from './player/player.service';
 import {AlarmClockService} from './alarm-clock/alarm-clock.service';
 import {WebRadioService} from './web-radio/web-radio.service';
@@ -41,6 +41,6 @@ import {VolumeService} from './homepage/volume.service';
                 path: 'alarm',
                 component: AlarmClockComponent
             }
-        ], {})], providers: [WebRadioService, AlarmClockService, PlayerService, VolumeService, provideHttpClient(withInterceptorsFromDi())] })
+        ], {})], providers: [WebRadioService, AlarmClockService, PlayerService, VolumeService, provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class AppModule {
 }
