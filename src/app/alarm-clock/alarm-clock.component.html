@@ -97,11 +97,13 @@
                             <div class="row">
                                 <div class="col-md-3"><label for="autoStop">Auto Stop</label></div>
                                 <div class="col-md-9">
-                                    <select class="form-control" id="autoStopMinutes" required [(ngModel)]="alarmClock.autoStopMinutes" name="autoStopMinutes">
+                                    <label>
+                                    <select class="form-control" id="autoStopMinutes" required [(ngModel)]="alarmClock.autoStopMinutes" name="autoStopMinutes" >
                                         @for (minute of maxAutoStopMinute; track minute) {
                                             <option>{{ minute }}</option>
                                         }
                                     </select>
+                                    </label>
                                 </div>
                             </div>
                             <div class="row">
